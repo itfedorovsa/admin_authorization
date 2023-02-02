@@ -14,8 +14,8 @@
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.jdbc.time_zone">UTC</property>
 
-        <mapping class="ru.proj.admin_authorization.model.User"/>
-        <mapping class="ru.proj.admin_authorization.model.Department"/>
-        <mapping class="ru.proj.admin_authorization.model.Role"/>
+        <mapping class="ru.proj.authorization.model.User"/>
+        <mapping class="ru.proj.authorization.model.Department"/>
+        <mapping class="ru.proj.authorization.model.Role"/>
     </session-factory>
 </hibernate-configuration>

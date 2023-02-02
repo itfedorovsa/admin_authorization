@@ -1,4 +1,4 @@
-package ru.proj.admin_authorization.model;
+package ru.proj.authorization.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
