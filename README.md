@@ -13,7 +13,7 @@ Implemented with:
  <li>Maven 3.8.5</li>
  <li>Spring Boot 2.7.3</li>
  <li>Bootstrap 4.4.1</li>
- <li>Thymeleaf</li>
+ <li>Thymeleaf 2.7.3</li>
  <li>JDBC 4</li>
  <li>Hibernate 5.6.11.Final</li>
  <li>PostgreSQL 42.2.9</li>
