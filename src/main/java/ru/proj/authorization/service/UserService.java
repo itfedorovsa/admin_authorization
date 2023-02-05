@@ -19,4 +19,10 @@ public interface UserService {
 
     Optional<User> findUserByLoginAndPassword(String login, String password);
 
+    Optional<User> findUserByLogin(String login);
+
+    void deleteUserByLogin(String userId);
+
+    boolean hasAdminRights(User user);
+
 }

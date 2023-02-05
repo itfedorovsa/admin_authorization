@@ -1,9 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -17,6 +16,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Admin Authorization</title>
 </head>
@@ -25,16 +25,14 @@
 
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Admin Authorization</a>
+        <a class="navbar-brand" th:href="@{/index}">Admin Authorization</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup" opacity="3">
             <div class="navbar-nav">
-                <span th:if="${isAdmin}">
-                          <a class="nav-item nav-link" th:href="@{/adminPanel}">Admin panel</a>
-                                 </span>
+                <a class="nav-item nav-link active" href="#">Admin panel<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" th:href="@{/profile}">Profile</a>
                 <a class="nav-item nav-link" th:if="${user.name == 'Guest'}" th:href="@{/loginPage}">
                     <span th:text="${user.name}"></span>
@@ -49,13 +47,32 @@
     </nav>
     <br/>
     <br/>
-    <h2 align="center" th:text="'Hi, ' + ${user.name} + '! Welcome to The Admin Authorization Project!'"></h2>
+    <h2 align="center">Admin panel</h2>
+    <br/>
+    <div class="vertical-center">
+        <form th:action="@{/formAddUser}" method="GET" th:align="center">
+            <button type="submit" class="btn btn-primary">Create user</button>
+        </form>
+    </div>
+    <br/>
+    <div class="vertical-center">
+        <form th:action="@{/formUpdateUserInputLogin}" method="GET" th:align="center">
+            <button type="submit" class="btn btn-primary">Update user by login</button>
+        </form>
+    </div>
+    <br/>
+    <div class="vertical-center">
+        <form th:action="@{/formDeleteUser}" method="GET" th:align="center">
+            <button type="submit" class="btn btn-primary">Delete user by login</button>
+        </form>
+    </div>
     <br/>
     <div class="vertical-center">
         <form th:action="@{/index}" method="GET" th:align="center">
-            <button type="submit" class="btn btn-primary">Continue (Plug, inactive)</button>
+            <button type="submit" class="btn btn-primary">Go to the corporate website main page</button>
         </form>
     </div>
+    <br/>
 </div>
 </body>
 </html>

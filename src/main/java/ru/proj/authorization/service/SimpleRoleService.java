@@ -7,7 +7,6 @@ import ru.proj.authorization.model.Role;
 import ru.proj.authorization.repository.RoleRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Role service layer
@@ -29,8 +28,8 @@ public class SimpleRoleService implements RoleService {
     }
 
     @Override
-    public Optional<Role> findRoleById(int roleId) {
-        return store.findRoleById(roleId);
+    public List<Role> findRolesByIds(List<Integer> ids) {
+        return store.findRolesByIds(ids);
     }
 
 }

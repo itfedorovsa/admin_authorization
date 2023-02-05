@@ -1,9 +1,9 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -25,16 +25,14 @@
 
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Admin Authorization</a>
+        <a class="navbar-brand" th:href="@{/index}">Admin Authorization</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup" opacity="3">
             <div class="navbar-nav">
-                <span th:if="${isAdmin}">
-                          <a class="nav-item nav-link" th:href="@{/adminPanel}">Admin panel</a>
-                                 </span>
+                <a class="nav-item nav-link" th:href="@{/adminPanel}">Admin panel</a>
                 <a class="nav-item nav-link" th:href="@{/profile}">Profile</a>
                 <a class="nav-item nav-link" th:if="${user.name == 'Guest'}" th:href="@{/loginPage}">
                     <span th:text="${user.name}"></span>
@@ -47,14 +45,10 @@
             </div>
         </div>
     </nav>
-    <br/>
-    <br/>
-    <h2 align="center" th:text="'Hi, ' + ${user.name} + '! Welcome to The Admin Authorization Project!'"></h2>
-    <br/>
-    <div class="vertical-center">
-        <form th:action="@{/index}" method="GET" th:align="center">
-            <button type="submit" class="btn btn-primary">Continue (Plug, inactive)</button>
-        </form>
+    <br/><br/><br/>
+    <div class="card p-3 mb-2 bg-label text-dark col-md-6 m-auto" style="width: 100%" th:align="center">
+        The user is successfully signed up!
+        <a class="nav-item nav-link" th:href="@{/adminPanel}">Continue</a>
     </div>
 </div>
 </body>

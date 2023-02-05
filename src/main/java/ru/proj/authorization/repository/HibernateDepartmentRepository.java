@@ -21,7 +21,7 @@ import java.util.Optional;
 @ThreadSafe
 public class HibernateDepartmentRepository implements DepartmentRepository {
 
-    private static final String FIND_ALL_DEPARTMENTS = "FROM Department";
+    private static final String FIND_ALL_DEPARTMENTS_ORDER_BY_NAME_ASC = "FROM Department ORDER BY name ASC";
 
     private static final String FIND_DEPARTMENT_BY_ID = "FROM Department WHERE id = :dId";
 
@@ -34,7 +34,7 @@ public class HibernateDepartmentRepository implements DepartmentRepository {
      */
     @Override
     public List<Department> findAllDepartments() {
-        return crudRepository.query(FIND_ALL_DEPARTMENTS, Department.class);
+        return crudRepository.query(FIND_ALL_DEPARTMENTS_ORDER_BY_NAME_ASC, Department.class);
     }
 
     /**

@@ -21,12 +21,22 @@ import java.util.Optional;
 public class HibernateUserRepository implements UserRepository {
 
     private static final String FIND_BY_LOGIN_AND_PASSWORD = """
-    SELECT DISTINCT u
-    FROM User u
-    JOIN FETCH u.department
-    JOIN FETCH u.roles
-    WHERE login = :uLogin AND password = :uPass
-    """;
+            SELECT DISTINCT u
+            FROM User u
+            JOIN FETCH u.department
+            JOIN FETCH u.roles
+            WHERE login = :uLogin AND password = :uPass
+            """;
+
+    private static final String FIND_BY_LOGIN = """
+            SELECT DISTINCT u
+            FROM User u
+            JOIN FETCH u.department
+            JOIN FETCH u.roles
+            WHERE login = :uLogin
+            """;
+
+    private static final String DELETE_BY_LOGIN = "DELETE FROM User WHERE login = :uLogin";
 
     private final CrudRepository crudRepository;
 
@@ -37,7 +47,7 @@ public class HibernateUserRepository implements UserRepository {
      * @return Optional of User with added id
      */
     @Override
-    public Optional<User> add(User user) {
+    public Optional<User> addUser(User user) {
         try {
             crudRepository.run(session -> session.save(user));
         } catch (IllegalStateException e) {
@@ -52,7 +62,7 @@ public class HibernateUserRepository implements UserRepository {
      * @param user User
      */
     @Override
-    public void update(User user) {
+    public void updateUser(User user) {
         crudRepository.run(session -> session.update(user));
     }
 
@@ -64,7 +74,7 @@ public class HibernateUserRepository implements UserRepository {
      * @return Optional of User
      */
     @Override
-    public Optional<User> findByLoginAndPassword(String login, String password) {
+    public Optional<User> findUserByLoginAndPassword(String login, String password) {
         Optional<User> user = Optional.empty();
         try {
             user = crudRepository.optional(
@@ -75,6 +85,36 @@ public class HibernateUserRepository implements UserRepository {
             e.printStackTrace();
         }
         return user;
+    }
+
+    /**
+     * Find User by login
+     *
+     * @param userLogin User's login
+     * @return Optional of User or empty Optional
+     */
+    @Override
+    public Optional<User> findUserByLogin(String userLogin) {
+        Optional<User> user = Optional.empty();
+        try {
+            user = crudRepository.optional(
+                    FIND_BY_LOGIN,
+                    User.class,
+                    Map.of("uLogin", userLogin));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    /**
+     * Delete User by login
+     *
+     * @param userLogin User's login
+     */
+    @Override
+    public void deleteUserByLogin(String userLogin) {
+        crudRepository.run(DELETE_BY_LOGIN, Map.of("uLogin", userLogin));
     }
 
 }

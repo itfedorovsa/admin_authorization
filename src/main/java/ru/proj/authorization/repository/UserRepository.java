@@ -14,10 +14,14 @@ import java.util.Optional;
  */
 public interface UserRepository {
 
-    Optional<User> add(User user);
+    Optional<User> addUser(User user);
 
-    void update(User user);
+    void updateUser(User user);
 
-    Optional<User> findByLoginAndPassword(String login, String password);
+    Optional<User> findUserByLoginAndPassword(String login, String password);
+
+    Optional<User> findUserByLogin(String userLogin);
+
+    void deleteUserByLogin(String userLogin);
 
 }

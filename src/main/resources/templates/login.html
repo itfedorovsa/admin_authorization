@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -22,39 +22,44 @@
 </head>
 
 <body th:background="@{/images/bg_admin_auth.jpg}" th:width="1920">
-
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Admin Authorization</a>
+        <a class="navbar-brand" th:href="@{/index}">Admin Authorization</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" opacity="3">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <span th:if="${isAdmin}">
-                          <a class="nav-item nav-link" th:href="@{/adminPanel}">Admin panel</a>
-                                 </span>
-                <a class="nav-item nav-link" th:href="@{/profile}">Profile</a>
-                <a class="nav-item nav-link" th:if="${user.name == 'Guest'}" th:href="@{/loginPage}">
-                    <span th:text="${user.name}"></span>
-                    <span> | Log in</span>
-                </a>
-                <a class="nav-item nav-link" th:if="${user.name != 'Guest'}" th:href="@{/logout}">
-                    <span th:text="${user.name}"></span>
-                    <span> | Log out</span>
-                </a>
             </div>
         </div>
     </nav>
-    <br/>
-    <br/>
-    <h2 align="center" th:text="'Hi, ' + ${user.name} + '! Welcome to The Admin Authorization Project!'"></h2>
-    <br/>
-    <div class="vertical-center">
-        <form th:action="@{/index}" method="GET" th:align="center">
-            <button type="submit" class="btn btn-primary">Continue (Plug, inactive)</button>
-        </form>
+    <div class="container pt-3">
+        <div class="row m-auto">
+            <div class="card p-3 mb-2 bg-label text-dark col-md-6 m-auto" style="width: 100%">
+                <div class="card-header">
+                    <b>Log in or request a new account via admin@mailbox.com to continue</b>
+                </div>
+                <div class="card-body">
+                    <div th:if="${fail}" class="alert alert-danger" role="alert">
+                        Incorrect login or password!
+                    </div>
+                    <form th:action="@{/login}" method="POST" th:align="center">
+                        <div class="form-group">
+                            <label>Login</label>
+                            <input type="text" class="form-control" name="login">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <div class="vertical-center">
+                            <button type="submit" class="btn btn-primary">Log in</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

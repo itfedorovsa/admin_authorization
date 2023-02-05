@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -115,6 +116,26 @@ public class CrudRepository {
     }
 
     /**
+     * Create and run command with arguments
+     *
+     * @param query Sql/hql query
+     * @param cl    Classname.Class
+     * @param args  Arguments to be inserted into the query
+     * @param <T>   Used generic data type
+     * @return true if number of affected rows after executing the command  > 0, otherwise false
+     */
+    public <T> boolean deleteEntityById(String query, Class<T> cl, Map<String, Object> args) {
+        Function<Session, Integer> command = session -> {
+            Query<T> sessionQuery = session.createQuery(query, cl);
+            for (Map.Entry<String, Object> arg : args.entrySet()) {
+                sessionQuery.setParameter(arg.getKey(), arg.getValue());
+            }
+            return sessionQuery.executeUpdate();
+        };
+        return tx(command) > 0;
+    }
+
+    /**
      * Primary method. Runs abstract command
      *
      * @param command A command to apply in the form of a function
@@ -136,4 +157,5 @@ public class CrudRepository {
             throw e;
         }
     }
+
 }

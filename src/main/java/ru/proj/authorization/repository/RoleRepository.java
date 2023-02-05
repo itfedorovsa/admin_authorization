@@ -3,7 +3,6 @@ package ru.proj.authorization.repository;
 import ru.proj.authorization.model.Role;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Role repository interface
@@ -16,6 +15,6 @@ public interface RoleRepository {
 
     List<Role> findAllRoles();
 
-    Optional<Role> findRoleById(int roleId);
+    List<Role> findRolesByIds(List<Integer> ids);
 
 }

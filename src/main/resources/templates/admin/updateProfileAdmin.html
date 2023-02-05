@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <title>Admin Authorization</title>
+</head>
+
+<body th:background="@{/images/bg_admin_auth.jpg}" th:width="1920">
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/index}">Admin Authorization</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" opacity="3">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" th:href="@{/adminPanel}">Admin panel</a>
+                <a class="nav-item nav-link" th:href="@{/profile}">Profile</a>
+                <a class="nav-item nav-link" th:if="${user.name == 'Guest'}" th:href="@{/loginPage}">
+                    <span th:text="${user.name}"></span>
+                    <span> | Log in</span>
+                </a>
+                <a class="nav-item nav-link" th:if="${user.name != 'Guest'}" th:href="@{/logout}">
+                    <span th:text="${user.name}"></span>
+                    <span> | Log out</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="row pt-3">
+        <div class="card p-3 mb-2 bg-label text-dark col-md-6 m-auto" style="width: 100%">
+            <div class="card-header">
+                Update your profile.
+            </div>
+            <div class="card-body">
+                <form th:action="@{/updateProfileAdmin}" method="POST" th:object="${user}">
+                    <input type="hidden" name="id" th:field="*{id}"/>
+                    <div class="form-group">
+                        <label for="name"><b>Name</b></label>
+                        <input type="text" class="form-control" name="name" id="name"
+                               th:field="*{name}" required/><br/>
+                        <label for="surname"><b>Surname</b></label>
+                        <input type="text" class="form-control" name="surname" id="surname"
+                               th:field="*{surname}" required/><br/>
+                        <label for="login"><b>Login</b></label>
+                        <input type="text" class="form-control" name="login" id="login"
+                               th:field="*{login}" required/><br/>
+                        <label for="password"><b>Password</b></label>
+                        <input type="text" class="form-control" name="password" id="password"
+                               th:field="*{password}" required/><br/>
+                        <label for="department.id"><b>Department</b></label>
+                        <select class="form-control" id="department.id" name="department.id">
+                            <option th:each="department : ${departments}"
+                                    th:value="${department.id}"
+                                    th:text="${department.name}"
+                                    th:selected="${department == user.department}">
+                            </option>
+                        </select><br/>
+                        <label for="role.id"><b>Roles</b></label>
+                        <select class="form-control" id="role.id" name="rolesIds" size="3" multiple="multiple" required>
+                            <option th:each="role: ${roles}"
+                                    th:value="${role.id}"
+                                    th:text="${role.name}"
+                                    th:selected="${user.roles.contains(role)}">
+                            </option>
+                        </select>
+                        <br/>
+                        <label for="phone"><b>Phone</b></label>
+                        <input type="text" class="form-control" name="phone" id="phone" th:field="*{phone}"
+                               pattern="\d*"
+                               title="Only digits in a row"
+                               required/><br/>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" class="form-control" name="email" id="email" th:field="*{email}"
+                               pattern="\S{1,}@\S{1,}\.\S{1,}" title="Email must be like name@mailbox.*"
+                               required/><br/>
+                        <label for="timezone.getID()"><b>Timezone</b></label>
+                        <select class="form-control" id="timezone.getID()" name="timezone.getID()"
+                                th:field="*{timezone}" required>
+                            <option th:each="timezone : ${timezones}"
+                                    th:value="${timezone.getID()}"
+                                    th:text="${timezone.getID() + ' : ' + timezone.getDisplayName()}"
+                                    th:selected="${timezone == user.timezone}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+                <br/>
+                <div class="vertical-center">
+                    <form th:action="@{/adminPanel}" method="GET" th:align="center">
+                        <button type="submit" class="btn btn-primary">Back</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

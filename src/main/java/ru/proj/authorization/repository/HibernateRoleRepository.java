@@ -7,7 +7,6 @@ import ru.proj.authorization.model.Role;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * Hibernate Role repository
@@ -21,9 +20,9 @@ import java.util.Optional;
 @ThreadSafe
 public class HibernateRoleRepository implements RoleRepository {
 
-    private static final String FIND_ALL_ROLES = "FROM Role";
+    private static final String FIND_ALL_ROLES_ORDER_BY_NAME_ASC = "FROM Role ORDER BY name ASC";
 
-    private static final String FIND_ROLE_BY_ID = "FROM Role WHERE id = :rId";
+    private static final String FIND_ROLES_BY_ID = "FROM Role WHERE id IN (:rIds)";
 
     private final CrudRepository crudRepository;
 
@@ -34,22 +33,21 @@ public class HibernateRoleRepository implements RoleRepository {
      */
     @Override
     public List<Role> findAllRoles() {
-        return crudRepository.query(FIND_ALL_ROLES, Role.class);
+        return crudRepository.query(FIND_ALL_ROLES_ORDER_BY_NAME_ASC, Role.class);
     }
 
     /**
-     * Find Role by id
+     * Find list of Role by id/ids
      *
-     * @param roleId Role id
-     * @return Optional of Role or empty Optional
+     * @param ids list of Role id/ids
+     * @return list of Role
      */
     @Override
-    public Optional<Role> findRoleById(int roleId) {
-        return crudRepository.optional(
-                FIND_ROLE_BY_ID,
+    public List<Role> findRolesByIds(List<Integer> ids) {
+        return crudRepository.query(
+                FIND_ROLES_BY_ID,
                 Role.class,
-                Map.of("rId", roleId)
-        );
+                Map.of("rIds", ids));
     }
 
 }
