@@ -17,4 +17,5 @@
     <include file="scripts/010_dml_roles_table_insert_data.sql" relativeToChangelogFile="true"/>
     <include file="scripts/011_dml_departments_table_insert_data.sql" relativeToChangelogFile="true"/>
     <include file="scripts/012_dml_roles_table_update_data.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/013_dml_users_table_update_data.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

@@ -51,8 +51,8 @@
             </div>
             <div class="card-body">
                 <form th:action="@{/updateProfile}" method="POST" th:object="${user}">
-                    The main settings of this account can only be changed by the administrator
-                    (Send your login and request to administrator@mailbox.com).
+                    <b>The main settings of this account can only be changed by the administrator
+                    (Send your login and request to administrator@mailbox.com).</b>
                     <br/><br/>
                     <input type="hidden" name="id" th:field="*{id}"/>
                     <div class="form-group">
@@ -62,16 +62,18 @@
                                th:text="'Surname: ' + ${user.surname}"/><br/><br/>
                         <input type="hidden" name="login" th:field="*{login}"
                                th:text="'Login: ' + ${user.login}"/><br/><br/>
-                        <input type="hidden" name="password" th:field="*{password}"
-                               th:text="'Password: ' + ${user.password}"/><br/><br/>
                         <span th:text="'Department: ' + ${user.department.name}"></span><br/><br/>
                         Roles:
                         <span name="roles" th:each="role: ${user.roles}"
                               th:utext="${role.name + ' '}"></span><br/><br/>
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" name="password" id="password" th:field="*{password}"
+                               required/><br/>
                         <label for="phone">Phone</label>
                         <input type="text" class="form-control" name="phone" id="phone" th:field="*{phone}"
                                pattern="\d*"
                                title="Only digits in a row"
+                               minlength="7"
                                required/><br/>
                         <label for="email">Email</label>
                         <input type="text" class="form-control" name="email" id="email" th:field="*{email}"

@@ -49,30 +49,31 @@
     <br/>
     <h2 align="center">Admin panel</h2>
     <br/>
-    <div class="vertical-center">
-        <form th:action="@{/formAddUser}" method="GET" th:align="center">
-            <button type="submit" class="btn btn-primary">Create user</button>
-        </form>
+    <div class="card p-3 mb-2 bg-label text-dark col-md-4 m-auto" style="width: 100%">
+        <div class="vertical-center">
+            <form th:action="@{/formAddUser}" method="GET" th:align="center">
+                <button type="submit" class="btn btn-primary">Create user</button>
+            </form>
+        </div>
+        <br/>
+        <div class="vertical-center">
+            <form th:action="@{/formUpdateUserInputLogin}" method="GET" th:align="center">
+                <button type="submit" class="btn btn-primary">Update user by login</button>
+            </form>
+        </div>
+        <br/>
+        <div class="vertical-center">
+            <form th:action="@{/formDeleteUser}" method="GET" th:align="center">
+                <button type="submit" class="btn btn-primary">Delete user by login</button>
+            </form>
+        </div>
+        <br/>
+        <div class="vertical-center">
+            <form th:action="@{/index}" method="GET" th:align="center">
+                <button type="submit" class="btn btn-primary">Go to the corporate website main page</button>
+            </form>
+        </div>
     </div>
-    <br/>
-    <div class="vertical-center">
-        <form th:action="@{/formUpdateUserInputLogin}" method="GET" th:align="center">
-            <button type="submit" class="btn btn-primary">Update user by login</button>
-        </form>
-    </div>
-    <br/>
-    <div class="vertical-center">
-        <form th:action="@{/formDeleteUser}" method="GET" th:align="center">
-            <button type="submit" class="btn btn-primary">Delete user by login</button>
-        </form>
-    </div>
-    <br/>
-    <div class="vertical-center">
-        <form th:action="@{/index}" method="GET" th:align="center">
-            <button type="submit" class="btn btn-primary">Go to the corporate website main page</button>
-        </form>
-    </div>
-    <br/>
 </div>
 </body>
 </html>

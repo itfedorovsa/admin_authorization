@@ -56,16 +56,16 @@
                     <div class="form-group">
                         <label for="name"><b>Name</b></label>
                         <input type="text" class="form-control" name="name" id="name"
-                               th:field="*{name}" required/><br/>
+                               th:field="*{name}" required/>
                         <label for="surname"><b>Surname</b></label>
                         <input type="text" class="form-control" name="surname" id="surname"
-                               th:field="*{surname}" required/><br/>
+                               th:field="*{surname}" required/>
                         <label for="login"><b>Login</b></label>
                         <input type="text" class="form-control" name="login" id="login"
-                               th:field="*{login}" required/><br/>
+                               th:field="*{login}" required/>
                         <label for="password"><b>Password</b></label>
                         <input type="text" class="form-control" name="password" id="password"
-                               th:field="*{password}" required/><br/>
+                               th:field="*{password}" required/>
                         <label for="department.id"><b>Department</b></label>
                         <select class="form-control" id="department.id" name="department.id">
                             <option th:each="department : ${departments}"
@@ -73,7 +73,7 @@
                                     th:text="${department.name}"
                                     th:selected="${department == aimUser.department}">
                             </option>
-                        </select><br/>
+                        </select>
                         <label for="role.id"><b>Roles</b></label>
                         <select class="form-control" id="role.id" name="rolesIds" size="3" multiple="multiple" required>
                             <option th:each="role: ${roles}"
@@ -81,16 +81,16 @@
                                     th:text="${role.name}"
                                     th:selected="${aimUser.roles.contains(role)}">
                             </option>
-                        </select><br/>
+                        </select>
                         <label for="phone"><b>Phone</b></label>
                         <input type="text" class="form-control" name="phone" id="phone" th:field="*{phone}"
                                pattern="\d*"
                                title="Only digits in a row"
-                               required/><br/>
+                               required/>
                         <label for="email"><b>Email</b></label>
                         <input type="text" class="form-control" name="email" id="email" th:field="*{email}"
                                pattern="\S{1,}@\S{1,}\.\S{1,}" title="Email must be like name@mailbox.*"
-                               required/><br/>
+                               required/>
                         <label for="timezone.getID()"><b>Timezone</b></label>
                         <select class="form-control" id="timezone.getID()" name="timezone.getID()"
                                 th:field="*{timezone}" required>

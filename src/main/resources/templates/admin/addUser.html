@@ -63,7 +63,7 @@
                         <label for="login"><b>Login*</b></label>
                         <input type="text" class="form-control" name="login" id="login">
                         <label for="password"><b>Password*</b></label>
-                        <input type="password" class="form-control" name="password" id="password">
+                        <input type="text" class="form-control" name="password" id="password">
                         <label for="department.id"><b>Department*</b></label>
                         <select class="form-control" id="department.id" name="department.id">
                             <option th:each="department : ${departments}"
@@ -80,7 +80,6 @@
                             </option>
                         </select>
                     </div>
-                    </br>
                     <button type="submit" class="btn btn-primary m-auto">Save</button>
                 </form>
                 <br/>

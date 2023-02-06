@@ -1,0 +1,1 @@
+UPDATE users SET phone='12021234567' WHERE login='admin';
